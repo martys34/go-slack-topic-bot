@@ -13,6 +13,44 @@
   revision = "176555c511e261941cb4d4fdd1740c7c16d94f12"
 
 [[projects]]
+  branch = "master"
+  digest = "1:4ab401741169a09826b38c9018aec51da7fc18f2061b87189c3facca3b9cfd4b"
+  name = "github.com/dpb587/go-slack-topic-bot"
+  packages = [
+    "message",
+    "message/boshio",
+    "message/github",
+    "message/pairist",
+    "slack",
+  ]
+  pruneopts = "UT"
+  revision = "4717ac20372f080eb8b8b060528a4b8dcdbb1a35"
+
+[[projects]]
+  digest = "1:318f1c959a8a740366fce4b1e1eb2fd914036b4af58fbd0a003349b305f118ad"
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  pruneopts = "UT"
+  revision = "c823c79ea1570fb5ff454033735a8e68575d1d0f"
+  version = "v1.3.0"
+
+[[projects]]
+  digest = "1:b4303d38d92c00af6603f3b865a9bd20e3c50cebe55489e5aeb721c26750e375"
+  name = "github.com/google/go-github"
+  packages = ["github"]
+  pruneopts = "UT"
+  revision = "7462feb2032c2da9e3b85e9b04e6853a6e9e14ca"
+  version = "v24.0.1"
+
+[[projects]]
+  digest = "1:a63cff6b5d8b95638bfe300385d93b2a6d9d687734b863da8e09dc834510a690"
+  name = "github.com/google/go-querystring"
+  packages = ["query"]
+  pruneopts = "UT"
+  revision = "44c6ddd0a2342c386950e880b658017258da92fc"
+  version = "v1.0.0"
+
+[[projects]]
   digest = "1:7b5c6e2eeaa9ae5907c391a91c132abfd5c9e8a784a341b5625e750c67e6825d"
   name = "github.com/gorilla/websocket"
   packages = ["."]
@@ -36,14 +74,59 @@
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
   version = "v0.8.0"
 
+[[projects]]
+  branch = "master"
+  digest = "1:f8b491a7c25030a895a0e579742d07136e6958e77ef2d46e769db8eec4e58fcd"
+  name = "golang.org/x/net"
+  packages = [
+    "context",
+    "context/ctxhttp",
+  ]
+  pruneopts = "UT"
+  revision = "16b79f2e4e95ea23b2bf9903c9809ff7b013ce85"
+
+[[projects]]
+  branch = "master"
+  digest = "1:037497a2c592b7aa03789f9d6492d02e7d7d166c0e363c95cb53952cf11c7ab0"
+  name = "golang.org/x/oauth2"
+  packages = [
+    ".",
+    "internal",
+  ]
+  pruneopts = "UT"
+  revision = "e64efc72b421e893cbf63f17ba2221e7d6d0b0f3"
+
+[[projects]]
+  digest = "1:6f3bd49ddf2e104e52062774d797714371fac1b8bddfd8e124ce78e6b2264a10"
+  name = "google.golang.org/appengine"
+  packages = [
+    "internal",
+    "internal/base",
+    "internal/datastore",
+    "internal/log",
+    "internal/remote_api",
+    "internal/urlfetch",
+    "urlfetch",
+  ]
+  pruneopts = "UT"
+  revision = "e9657d882bb81064595ca3b56cbe2546bbabf7b1"
+  version = "v1.4.0"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
     "github.com/dpb587/go-pairist/api",
     "github.com/dpb587/go-pairist/denormalized",
+    "github.com/dpb587/go-slack-topic-bot/message",
+    "github.com/dpb587/go-slack-topic-bot/message/boshio",
+    "github.com/dpb587/go-slack-topic-bot/message/github",
+    "github.com/dpb587/go-slack-topic-bot/message/pairist",
+    "github.com/dpb587/go-slack-topic-bot/slack",
+    "github.com/google/go-github/github",
     "github.com/nlopes/slack",
     "github.com/pkg/errors",
+    "golang.org/x/oauth2",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
