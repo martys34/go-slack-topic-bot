@@ -12,7 +12,7 @@ import (
 func main() {
 	msg, err := message.Join(
 		" | ",
-		message.Literal("see pinned messages for helpful links "),
+		message.Literal("see pinned messages for helpful links"),
 		message.Prefix(
 			"interrupt: ",
 			message.Conditional(
