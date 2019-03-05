@@ -1,11 +1,12 @@
 package slack
 
 import (
-	"log"
-	"os"
-
 	"github.com/nlopes/slack"
 	"github.com/pkg/errors"
+	"log"
+	"os"
+	"regexp"
+	"strings"
 )
 
 func UpdateChannelTopic(channel, msg string) error {
@@ -30,6 +31,27 @@ func UpdateChannelTopic(channel, msg string) error {
 	}
 
 	log.Printf("INFO: updated topic: %s", newTopic)
+
+	return nil
+}
+
+func SendGitHubReminder(interruptPair string) error {
+	api := slack.New(os.Getenv("SLACK_TOKEN"))
+
+	msgOptions := slack.MsgOptionCompose(
+		slack.MsgOptionText(interruptPair + " gentle reminder to check GitHub issues 😊", false),
+		slack.MsgOptionAsUser(true))
+
+	trimmedInterruptPair := regexp.MustCompile("[^a-zA-Z0-9 ]*").ReplaceAllString(interruptPair, "")
+	people := strings.Fields(trimmedInterruptPair)
+
+	for person := range people {
+		_, err := api.PostEphemeral(os.Getenv("SLACK_CHANNEL"), people[person], msgOptions)
+
+		if err != nil {
+			return errors.Wrap(err, "sending github reminder")
+		}
+	}
 
 	return nil
 }
