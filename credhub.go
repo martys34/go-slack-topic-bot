@@ -33,7 +33,7 @@ func main() {
 							"Victoria": "U6SUTRCKB",
 						},
 					},
-					message.Literal("break glass: `@credhub-team`"),
+					message.Literal("| break glass: `@credhub-team` |"),
 					message.Literal("PMs: <@U0DFF9JLB>, <@U27926NR3>"),
 				),
 			),
