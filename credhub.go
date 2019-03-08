@@ -47,7 +47,12 @@ func main() {
 
 	log.Printf("DEBUG: expected message: %s", msg)
 
-	err = slack.UpdateChannelTopic(os.Getenv("SLACK_CHANNEL"), msg)
+	err = slack.UpdateChannelTopic(os.Getenv("PIVOTAL_SLACK_CHANNEL"), os.Getenv("PIVOTAL_SLACK_TOKEN"), msg)
+	if err != nil {
+		log.Panicf("ERROR: %v", err)
+	}
+
+	err = slack.UpdateChannelTopic(os.Getenv("CLOUDFOUNDRY_SLACK_CHANNEL"), os.Getenv("CLOUDFOUNDRY_SLACK_TOKEN"), msg)
 	if err != nil {
 		log.Panicf("ERROR: %v", err)
 	}

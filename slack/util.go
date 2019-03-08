@@ -9,8 +9,8 @@ import (
 	"strings"
 )
 
-func UpdateChannelTopic(channel, msg string) error {
-	api := slack.New(os.Getenv("SLACK_TOKEN"))
+func UpdateChannelTopic(channel, token, msg string) error {
+	api := slack.New(token)
 
 	channelInfo, err := api.GetChannelInfo(channel)
 	if err != nil {
@@ -36,7 +36,7 @@ func UpdateChannelTopic(channel, msg string) error {
 }
 
 func SendGitHubReminder(interruptPair string) error {
-	api := slack.New(os.Getenv("SLACK_TOKEN"))
+	api := slack.New(os.Getenv("PIVOTAL_SLACK_TOKEN"))
 
 	msgOptions := slack.MsgOptionCompose(
 		slack.MsgOptionText(interruptPair + " gentle reminder to check GitHub issues 😊", false),
@@ -46,7 +46,7 @@ func SendGitHubReminder(interruptPair string) error {
 	people := strings.Fields(trimmedInterruptPair)
 
 	for person := range people {
-		_, err := api.PostEphemeral(os.Getenv("SLACK_CHANNEL"), people[person], msgOptions)
+		_, err := api.PostEphemeral(os.Getenv("PIVOTAL_SLACK_CHANNEL"), people[person], msgOptions)
 
 		if err != nil {
 			return errors.Wrap(err, "sending github reminder")
