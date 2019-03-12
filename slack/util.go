@@ -36,7 +36,7 @@ func UpdateChannelTopic(channel, token, msg string) error {
 }
 
 func SendGitHubReminder(interruptPair string) error {
-	api := slack.New(os.Getenv("SLACK_TOKEN"))
+	api := slack.New(os.Getenv("PIVOTAL_SLACK_TOKEN"))
 
 	msgOptions := slack.MsgOptionCompose(
 		slack.MsgOptionText(interruptPair + " gentle reminder to check GitHub issues 😊", false),
