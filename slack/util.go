@@ -46,7 +46,7 @@ func SendGitHubReminder(interruptPair string) error {
 	people := strings.Fields(trimmedInterruptPair)
 
 	for person := range people {
-		_, err := api.PostEphemeral(os.Getenv("SLACK_CHANNEL"), people[person], msgOptions)
+		_, err := api.PostEphemeral(os.Getenv("PIVOTAL_SLACK_CHANNEL"), people[person], msgOptions)
 
 		if err != nil {
 			return errors.Wrap(err, "sending github reminder")
