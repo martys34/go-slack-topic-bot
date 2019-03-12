@@ -9,8 +9,8 @@ import (
 	"strings"
 )
 
-func UpdateChannelTopic(channel, msg string) error {
-	api := slack.New(os.Getenv("SLACK_TOKEN"))
+func UpdateChannelTopic(channel, token, msg string) error {
+	api := slack.New(token)
 
 	channelInfo, err := api.GetChannelInfo(channel)
 	if err != nil {

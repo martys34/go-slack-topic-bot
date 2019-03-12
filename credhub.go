@@ -6,10 +6,11 @@ import (
 	"github.com/martys34/go-slack-topic-bot/slack"
 	"log"
 	"os"
+	"strings"
 )
 
 func main() {
-	team := pairist.PeopleInRole{
+	pivotalTeam := pairist.PeopleInRole{
 		Team: "therealslimcredhub",
 		Role: "Bat-person",
 		People: map[string]string{
@@ -23,10 +24,43 @@ func main() {
 			"Victoria": "U6SUTRCKB",
 		},
 	}
+	pivotalPM := []string {"<@U0DFF9JLB>", "<@U27926NR3>"}
+	createChannelMessage("PIVOTAL",
+		"see pinned messages for helpful links", pivotalTeam, pivotalPM)
+
+	cloudFoundryTeam := pairist.PeopleInRole{
+		Team: "therealslimcredhub",
+		Role: "Bat-person",
+		People: map[string]string{
+			"Andrew":   "U8TDZ8VU3",
+			"Mark":     "U02SQ5CJW",
+			"Marty":    "UC1H82QF8",
+			"Walter":   "UDKK311U5",
+			"Frances":  "UFA2FAQ7P",
+			"Josh":     "U1YKRGMDZ",
+			"Tom":      "UG4JCSF5H",
+			"Victoria": "U6W2F82B1",
+		},
+	}
+
+	cloudFoundryPM := []string {"<@UDFK4K0KT>"}
+	createChannelMessage("CLOUDFOUNDRY",
+		"Please include your CredHub logs in case of Errors", cloudFoundryTeam, cloudFoundryPM)
+
+	interruptPair, _ := pivotalTeam.Message()
+	err := slack.SendGitHubReminder(interruptPair)
+
+	if err != nil {
+		log.Panicf("ERROR: %v", err)
+	}
+}
+
+func createChannelMessage(workspace, firstLine string, team pairist.PeopleInRole, PM []string) {
+	pmString := strings.Join(PM, ", ")
 
 	msg, err := message.Join(
 		" | ",
-		message.Literal("see pinned messages for helpful links"),
+		message.Literal(firstLine),
 		message.Prefix(
 			"interrupt: ",
 			message.Conditional(
@@ -35,7 +69,7 @@ func main() {
 					" ",
 					team,
 					message.Literal("| break glass: `@credhub-team` |"),
-					message.Literal("PMs: <@U0DFF9JLB>, <@U27926NR3>"),
+					message.Literal("PM: " + pmString),
 				),
 			),
 		),
@@ -47,18 +81,11 @@ func main() {
 
 	log.Printf("DEBUG: expected message: %s", msg)
 
-	err = slack.UpdateChannelTopic(os.Getenv("SLACK_CHANNEL"), msg)
+	err = slack.UpdateChannelTopic(os.Getenv(workspace + "_SLACK_CHANNEL"), os.Getenv(workspace + "_SLACK_TOKEN"), msg)
 	if err != nil {
 		log.Panicf("ERROR: %v", err)
 	}
 
-	interruptPair, _ := team.Message()
-
-	err = slack.SendGitHubReminder(interruptPair)
-
-	if err != nil {
-		log.Panicf("ERROR: %v", err)
-	}
 }
 
 
