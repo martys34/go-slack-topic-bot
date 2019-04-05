@@ -43,7 +43,7 @@ func main() {
 		},
 	}
 
-	cloudFoundryPM := []string {"<@UDFK4K0KT>"}
+	cloudFoundryPM := []string {"<@UDFK4K0KT>", "<@UHPMJCXGC>"}
 	createChannelMessage("CLOUDFOUNDRY",
 		"Please include your CredHub logs in case of Errors", cloudFoundryTeam, cloudFoundryPM)
 
