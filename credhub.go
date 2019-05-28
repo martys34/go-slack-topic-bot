@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -44,7 +45,13 @@ func main() {
 		"Please include your CredHub logs in case of Errors", cloudFoundryTeam, cloudFoundryPM)
 
 	interruptPair, _ := pivotalTeam.Message()
-	err := slack.SendGitHubReminder(interruptPair)
+	githubReminder := "gentle reminder to check GitHub issues 😊"
+	err := slack.SendMessage(interruptPair, githubReminder)
+
+	if time.Now().Weekday() == time.Weekday(6) {
+		err = slack.SendMessage(interruptPair,
+			"don't forget to spin the feedback wheel! :fidgetspinner: \n https://tinyurl.com/credhubfeedback")
+	}
 
 	if err != nil {
 		log.Panicf("ERROR: %v", err)

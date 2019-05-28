@@ -35,11 +35,11 @@ func UpdateChannelTopic(channel, token, msg string) error {
 	return nil
 }
 
-func SendGitHubReminder(interruptPair string) error {
+func SendMessage(interruptPair string, message string) error {
 	api := slack.New(os.Getenv("PIVOTAL_SLACK_TOKEN"))
 
 	msgOptions := slack.MsgOptionCompose(
-		slack.MsgOptionText(interruptPair + " gentle reminder to check GitHub issues 😊", false),
+		slack.MsgOptionText(interruptPair + " " + message, false),
 		slack.MsgOptionAsUser(true))
 
 	trimmedInterruptPair := regexp.MustCompile("[^a-zA-Z0-9 ]*").ReplaceAllString(interruptPair, "")
