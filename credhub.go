@@ -48,9 +48,9 @@ func main() {
 	githubReminder := "gentle reminder to check GitHub issues 😊"
 	err := slack.SendMessage(interruptPair, githubReminder)
 
-	if time.Now().Weekday() == time.Weekday(6) {
+	if time.Now().Weekday() == time.Weekday(5) {
 		err = slack.SendMessage(interruptPair,
-			"don't forget to spin the feedback wheel! :fidgetspinner: \n https://tinyurl.com/credhubfeedback")
+			"don't forget to spin the feedback wheel! :fidgetspinner:\nhttps://tinyurl.com/credhubfeedback")
 	}
 
 	if err != nil {
