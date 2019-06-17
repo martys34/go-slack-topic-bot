@@ -25,23 +25,6 @@ func main() {
 		},
 	}
 
-	cloudFoundryTeam := pairist.PeopleInRole{
-		Team: "therealslimcredhub",
-		Role: "Bat-person",
-		People: map[string]string{
-			"Andrew":   "U8TDZ8VU3",
-			"Mark":     "U02SQ5CJW",
-			"Marty":    "UC1H82QF8",
-			"Josh":     "U1YKRGMDZ",
-			"Tom":      "UG4JCSF5H",
-			"Victoria": "U6W2F82B1",
-		},
-	}
-
-	cloudFoundryPM := []string{"<@UDFK4K0KT>", "<@UHPMJCXGC>"}
-	createChannelMessage("CLOUDFOUNDRY",
-		"Please include your CredHub logs in case of Errors", cloudFoundryTeam, cloudFoundryPM)
-
 	interruptPair, _ := pivotalTeam.Message()
 
 	if time.Now().Weekday() == time.Weekday(5) {
